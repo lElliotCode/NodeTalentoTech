@@ -17,8 +17,8 @@ import { join, dirname } from "path";
 import { fileURLToPath } from "url";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-import { productsRouter } from "./routes/products.routes.js";
-import { authRouter } from "./routes/auth.routes.js";
+import { productsRouter } from "./src/routes/products.routes.js";
+import { authRouter } from "./src/routes/auth.routes.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

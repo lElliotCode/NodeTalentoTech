@@ -1,0 +1,10 @@
+# Node.js
+node_modules/
+.env
+package-lock.json
+
+# Firebase
+firebase-admin.json
+firebase.config.json
+
+public/

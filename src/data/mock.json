@@ -1,0 +1,26 @@
+[
+    {
+        "id": "1",
+        "name": "Galletas",
+        "category": "Almacen",
+        "rating": 1
+    },
+    {
+        "id": "2",
+        "name": "Television",
+        "category": "Electronica",
+        "rating": 5
+    },
+    {
+        "id": "3",
+        "name": "Remera",
+        "category": "Prendas",
+        "rating": 2
+    },
+    {
+        "id": "4",
+        "name": "Bocaditos",
+        "category": "Almacen",
+        "rating": 2
+    }
+]

@@ -1,0 +1,64 @@
+GET http://localhost:3000/products/
+###
+
+GET http://localhost:3000/asdasd
+###
+
+
+GET http://localhost:3000/products/4a27dcf8-eae2-4273-b5b7-f25522080a53
+###
+
+GET http://localhost:3000/products?category=Joyeria
+
+###
+
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{
+    "name": "Terrible producto",
+    "category": ["Electronica"],
+    "rating": 312
+}
+
+###
+
+PATCH http://localhost:3000/products/a771f755-51ac-4a68-b9f7-c3c14e46fa5e
+Content-Type: application/json
+
+{
+    "name": "Colgante de perlas",
+    "category": ["Joyeria"],
+    "rating": 5
+}
+
+###
+
+DELETE http://localhost:3000/products/a771f755-51ac-4a68-b9f7-c3c14e46fa5e
+
+###
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "name": "test2",
+    "email": "test2@example.com",
+    "password": "password"
+}
+
+###
+
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "email": "test2@example.com",
+    "password": "password"
+}
+
+###
+
+POST http://localhost:3000/auth/logout
+
+
+

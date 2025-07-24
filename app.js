@@ -24,13 +24,14 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const app = express();
-const PORT = 3000;
 
 app.use(express.static(join(__dirname, "public")));
 app.use(express.json());
 app.disable("x-powered-by");
 app.use(cors());
 app.use(cookieParser());
+
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT} with express`)

@@ -42,15 +42,15 @@ JWT_SECRET=tuClaveSecretaJWT_muy_segura
 
 
 
-3. Iniciá el servidor:
+3. Iniciá el servidor en modo desarrollo:
 
 ```bash
-npm start
+npm run dev
 ```
 
 ---
 
-## 🔐 Autenticación
+## 🔐 Autenticación para el uso de rutas protegidas
 
 - Al iniciar sesión, el token JWT se guarda automáticamente en una **cookie**.
 - No es necesario enviarlo manualmente si el cliente gestiona cookies.
@@ -80,6 +80,15 @@ Authorization: Bearer <token>
 ## ✍️ Ejemplos de peticiones
 
 ### Registro
+
+⚠️ Importante: Jean Paul, podes usar un usuario ya creado para hacer las pruebas de las rutas protegidas o crearte uno nuevo con la ruta auth/register
+Usuario ya registrado
+```json
+{
+  "email": "test@example.com",
+  "password": "password"
+}
+```
 
 ```json
 POST /auth/register

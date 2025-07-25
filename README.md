@@ -26,12 +26,21 @@ cd nombre-del-repo
 npm install
 ```
 
-2. Configurá el archivo `.env`:
+2. Configurá el archivo `.env` en la raíz del proyecto:
 
 ```env
-PORT=3000
-JWT_SECRET=tuClaveSecretaJWT
+envPORT=3000
+FIREBASE_API_KEY=tu_firebase_api_key
+FIREBASE_AUTH_DOMAIN=tu_proyecto.firebaseapp.com
+FIREBASE_PROJECT_ID=tu_proyecto_id
+FIREBASE_STORAGE_BUCKET=tu_proyecto.firebasestorage.app
+FIREBASE_MESSAGING_SENDER_ID=tu_sender_id
+FIREBASE_APP_ID=tu_app_id
+JWT_SECRET=tuClaveSecretaJWT_muy_segura
 ```
+⚠️ Importante: Reemplazá todos los valores con los de tu proyecto Firebase. Podés obtenerlos desde la consola de Firebase > Configuración del proyecto > Configuración general.
+
+
 
 3. Iniciá el servidor:
 

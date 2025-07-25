@@ -1,47 +1,67 @@
-import { db }  from '../firebase/firebase.admin.js';
+import { db } from "../firebase/firebase.data.js";
+import {
+  collection,
+  getDocs,
+  doc,
+  getDoc,
+  deleteDoc,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
 
-const collection = db.collection("productos");
+const productsCollection = collection(db, "productos");
 
 export class ProductModel {
-    static collection = collection;
 
-    static async getAll({ category }) {
-        let query = this.collection;
-        if (category) {
-            query = query.where("category", "==", category.toLowerCase());
-        }
-        const snapshot = await query.get();
-
-        console.log(snapshot.docs.map(doc => doc.data()))
-        if (snapshot.empty) throw new Error("No products found");
-        return snapshot.docs.map(doc => doc.data());
+  static async getAll({ category } = {}) {
+    try {
+        const snapshot = await getDocs(productsCollection);
+  
+    if (snapshot.empty) throw new Error("No products found");
+  
+    let products = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  
+    if (category) {
+      // Filtrado manual simple en JS, sin usar query firestore
+      const lowerCategory = category.toLowerCase();
+      products = products.filter(p => Array.isArray(p.category) && p.category.some(c => c.toLowerCase() === lowerCategory));
     }
-
-    static async getById({ id }) {
-        const doc = await this.collection.doc(id).get();
-        if (!doc.exists) throw new Error("Product not found");
-        return doc.data();
+  
+    return products;
+    } catch (error) {
+        throw error;
     }
+  }
+  
 
-    static async create({ input }) {
-        const newProduct = {
-            id: crypto.randomUUID(),
-            ...input
-        }
-        const docRef = this.collection.doc(newProduct.id);
-        await docRef.set(newProduct);
-        return newProduct;
-    }
+  static async getById({ id }) {
+    const docRef = doc(productsCollection, id);
+    const docSnap = await getDoc(docRef);
+    if (!docSnap.exists()) throw new Error("Product not found");
+    return { id: docSnap.id, ...docSnap.data() };
+  }
 
-    static async update({ id, product }) {
-        const docRef = this.collection.doc(id);
-        await docRef.update(product);
-        return docRef.get().then(doc => doc.data());
-    }
+  static async create({ input }) {
+    const newId = crypto.randomUUID();
+    const newProduct = {
+      id: newId,
+      ...input,
+    };
+    const docRef = doc(productsCollection, newId);
+    await setDoc(docRef, newProduct);
+    return newProduct;
+  }
 
-    static async delete(id) {
-        const docRef = this.collection.doc(id);
-        await docRef.delete();
-        return true;
-    }
+  static async update({ id, product }) {
+    const docRef = doc(productsCollection, id);
+    await updateDoc(docRef, product);
+    const updatedDoc = await getDoc(docRef);
+    return { id: updatedDoc.id, ...updatedDoc.data() };
+  }
+
+  static async delete(id) {
+    const docRef = doc(productsCollection, id);
+    await deleteDoc(docRef);
+    return true;
+  }
 }

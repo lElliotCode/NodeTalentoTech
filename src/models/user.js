@@ -1,26 +1,33 @@
-import { db } from '../firebase/firebase.admin.js';
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import crypto from 'crypto';
+import { db } from "../firebase/firebase.data.js";
+import {
+  collection,
+  doc,
+  getDocs,
+  setDoc,
+  query,
+  where
+} from "firebase/firestore";
 
-const collection = db.collection("usuarios");
+const userCollection = collection(db, "usuarios");
 
 export const findOne = async ({ email }) => {
-  const thisCollection = collection;
-  const snapshot = await thisCollection.where('email', '==', email).get();
-  if (snapshot.empty) return false
+  const q = query(userCollection, where('email', '==', email));
+  const snapshot = await getDocs(q);
+  if (snapshot.empty) return false;
   const doc = snapshot.docs[0];
   const user = doc.data();
   return user;
 }
 
 export class UserModel {
-  static collection = collection;
 
   static async register({ name, email, password }) {
     const id = crypto.randomUUID();
     const hashPassword = bcrypt.hashSync(password, 10);
-    const docRef = this.collection.doc(id);
+    const docRef = doc(userCollection, id);
 
     const user = {
       id,

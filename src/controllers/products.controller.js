@@ -4,9 +4,10 @@ import { validateProduct, validatePartialProduct } from "../schemas/product.js";
 export const getProducts = async (req, res) => {
     try {
         const { category } = req.query;
-        const products = await ProductModel.getAll(category ? { category } : {});
+        const products = await ProductModel.getAll({ category });
         res.json(products)
     } catch (error) {
+        console.log(error)
         res.status(500).json({ message: error.message })
     }
 }

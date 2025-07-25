@@ -109,7 +109,7 @@ POST /auth/login
 }
 ```
 
-### Crear producto (requiere login)
+### Crear producto (requiere auth)
 
 ```json
 POST /products
@@ -120,7 +120,7 @@ POST /products
 }
 ```
 
-### Editar producto
+### Editar producto (requiere auth)
 
 ```json
 PATCH /products/:id
@@ -133,6 +133,8 @@ PATCH /products/:id
 ---
 
 ## 📄 Tips para pruebas
+
+## ⚠️ Importante: Para obtener la id de los productos y poder hacer las peticiones con id solo basta con llamar al GET de /products
 
 - Usá `rest.http` en VSCode con la extensión **REST Client**.
 - En Postman, activá el manejo de cookies o enviá el token como `Bearer` en headers si es necesario.

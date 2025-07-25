@@ -4,7 +4,7 @@ import fs from 'fs';
 
 // Leé el archivo JSON manualmente
 const serviceAccount = JSON.parse(
-  fs.readFileSync(new URL('/Users/Ellio/Escritorio/Talento Tech 2025/NodeJs/src/firebase/firebase.key.config.json', import.meta.url))
+  fs.readFileSync('./src/firebase/node-api-rest.json', 'utf-8')
 );
 
 admin.initializeApp({
